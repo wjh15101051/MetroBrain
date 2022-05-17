@@ -20,12 +20,12 @@
 </template>
 
 <script setup>
-  import {ref} from "vue";
+import {ref} from "vue";
 
-  const TabActiveName = ref('first')
-  const TabHandleClick = (tab, event) => {
-    console.log(tab, event)
-  }
+const TabActiveName = ref('first')
+const TabHandleClick = (tab, event) => {
+  console.log(tab, event)
+}
 
 </script>
 
@@ -33,7 +33,7 @@
 import FlowPred from './components/FlowPred.vue'
 import ODPred from './components/ODPred.vue'
 import GasLeakagePred from './components/GasLeakagePred.vue'
-import ToyPred from './components/ToyPred.vue'
+import ToyPred from './components/ToyPred/ToyPred.vue'
 
 export default {
   name: "FrontendFramework",

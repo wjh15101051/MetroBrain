@@ -176,5 +176,7 @@ export default function EchartsInit() {
     });
 
     option && myChart.setOption(option);
-
+    option && myChart.on('click', function (params) {
+        console.log(params)
+    })
 }

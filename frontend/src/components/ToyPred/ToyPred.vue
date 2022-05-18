@@ -2,7 +2,7 @@
   <el-row :gutter="20">
     <el-col :span="12" style="display: block;">
       <div class="grid-content" style="border-radius: 4px;height: 75vh;border: #409EFF 1px solid;">
-        <ToyPredMapChart id="toy_pred_map_chart"></ToyPredMapChart>
+        <div id="MapChart" style="height: 75vh;position: relative;"></div>
       </div>
     </el-col>
     <el-col :span="12" style="display: block;">
@@ -29,24 +29,24 @@ el-col {
 </style>
 
 <script>
-import ToyPredMapChart from "@/components/ToyPred/MapChart/ToyPredMapChart.vue";
 
-// let curClass = 1
-
+// import EchartsInit from "@/components/ToyPred/MapChart/ToyPredEchartsInit"
+import bmap_api from "@/components/ToyPred/MapChart/ToyPredBMapInit";
 export default {
   name: "ToyPred",
-  components: {
-    ToyPredMapChart
+  props: ['tabActive'],
+  methods: {
+    buildPage() {
+      console.log("switch to fourth tab and build page")
+      // setTimeout(EchartsInit, 1000)
+      setTimeout(bmap_api.BMapInit, 1000)
+    },
+    chooseClass1() {
+      bmap_api.setClass(1)
+    },
+    chooseClass2() {
+      bmap_api.setClass(2)
+    }
   }
-
-  // methods: {
-  //   chooseClass1() {
-  //     curClass = 1
-  //   },
-  //   chooseClass2() {
-  //     curClass = 2
-  //   }
-  // }
 }
-
 </script>

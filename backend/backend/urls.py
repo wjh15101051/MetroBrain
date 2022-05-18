@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', views.test),
     path('',views.index, name='index'),
-    path('station_static_data/', views.station_static_data)
+    path('station_static_data/', views.station_static_data),
+    path('toy-pred/', views.toy_pred)
 ]

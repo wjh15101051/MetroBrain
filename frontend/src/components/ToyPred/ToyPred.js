@@ -1,5 +1,5 @@
 import {createApp} from "vue"
-import ToyPred from "./ToyPred"
+import ToyPred from "./ToyPred.vue"
 import ElementPlus from "element-plus"
 
 const ToyPredApp = createApp(ToyPred)

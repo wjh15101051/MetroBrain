@@ -20,41 +20,64 @@ export default {
             let class1IconImg = require('@/assets/figure/location_green.png')
             let class2IconImg = require('@/assets/figure/location_red.png')
             console.log(curClass)
-            if (curClass === 1) {
-                let class1Icon = new BMapAPI.Icon(class1IconImg, new BMapAPI.Size(26, 26), {
-                    imageSize: new BMapAPI.Size(26, 26),
-                    anchor: new BMapAPI.Size(13, 26)
+            if (curClass === 1 || curClass === 2) {
+                if (curClass === 1) {
+                    let class1Icon = new BMapAPI.Icon(class1IconImg, new BMapAPI.Size(26, 26), {
+                        imageSize: new BMapAPI.Size(26, 26),
+                        anchor: new BMapAPI.Size(13, 26)
+                    })
+                    console.log(class1Icon)
+                    map.addOverlay(new BMapAPI.Marker(pos, {icon: class1Icon}))
+                } else {
+                    let class2Icon = new BMapAPI.Icon(class2IconImg, new BMapAPI.Size(26, 26), {
+                        imageSize: new BMapAPI.Size(26, 26),
+                        anchor: new BMapAPI.Size(13, 26)
+                    })
+                    console.log(class2Icon)
+                    map.addOverlay(new BMapAPI.Marker(pos, {icon: class2Icon}))
+                }
+                let send_data = new URLSearchParams()
+                send_data.append("type", "add-new-point")
+                send_data.append("cur_class", curClass)
+                send_data.append("location_lng", e.point.lng)
+                send_data.append("location_lat", e.point.lat)
+                axios({
+                    method: 'post',
+                    url: 'http://127.0.0.1:8000/toy-pred/',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    data: send_data
+                }).then((response) => {
+                    console.log(response)
+                }).catch((error) => {
+                    console.log(error)
                 })
-                console.log(class1Icon)
-                map.addOverlay(new BMapAPI.Marker(pos, {icon: class1Icon}))
             } else {
-                let class2Icon = new BMapAPI.Icon(class2IconImg, new BMapAPI.Size(26, 26), {
-                    imageSize: new BMapAPI.Size(26, 26),
-                    anchor: new BMapAPI.Size(13, 26)
-                })
-                console.log(class2Icon)
-                map.addOverlay(new BMapAPI.Marker(pos, {icon: class2Icon}))
+                console.log("query")
             }
-            let send_data = new URLSearchParams()
-            send_data.append("type", "add-new-point")
-            send_data.append("cur_class", curClass)
-            send_data.append("location_lng", e.point.lng)
-            send_data.append("location_lat", e.point.lat)
-            axios({
-                method: 'post',
-                url: 'http://127.0.0.1:8000/toy-pred/',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                data: send_data
-            }).then((response) => {
-                console.log(response)
-            }).catch((error) => {
-                console.log(error)
-            })
         })
     },
     setClass(c) {
         curClass = c
+    },
+    startPred() {
+        let send_data = new URLSearchParams()
+        send_data.append("type", "start-prediction")
+        axios({
+            method: 'post',
+            url: 'http://127.0.0.1:8000/toy-pred/',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: send_data
+        }).then((response) => {
+            console.log(response)
+        }).catch((error) => {
+            console.log(error)
+        })
+    },
+    query() {
+
     }
 }

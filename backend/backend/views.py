@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from ToyPredSolve.ToyPredSolveOperations import add_new_point, get_point_class
+from ToyPredSolve.ToyPredSolveOperations import start_pred, add_new_point, get_point_class
 
 
 def test(request):
@@ -25,6 +25,10 @@ def toy_pred(request):
             add_new_point(data['location_lng'], data['location_lat'], data['cur_class'])
             print("add new point succeed!")
             return HttpResponse("add new point succeed!")
+        elif data.get("type") == "start-prediction":
+            start_pred()
+            print("start prediction succeed!")
+            return HttpResponse("start prediction succeed!")
         else:
             print("wrong type in POST")
             return HttpResponse("wrong type in POST")
